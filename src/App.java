@@ -226,6 +226,7 @@ public class App {
             s.append("\nEmpilhando...");
             for (int i = 0; i < array.length; i++) {
                 p.empilhar(array[i]);
+                s.append("\n" + array[i]);
             }
 
         }
