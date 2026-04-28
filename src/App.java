@@ -64,6 +64,7 @@ public class App {
         System.out.println("4 - Iniciar novo pedido");
         System.out.println("5 - Fechar pedido");
         System.out.println("6 - Listar produtos dos pedidos mais recentes");
+        System.out.println("7 - Teste Preliminar");
         System.out.println("0 - Sair");
         System.out.print("Digite sua opção: ");
         return Integer.parseInt(teclado.nextLine());
@@ -217,6 +218,23 @@ public class App {
     	
     	// TODO
     }
+
+    public static String testeMatricula(int[] array){
+        StringBuilder s = new StringBuilder();
+        Pilha<Integer> p = new Pilha<>(); 
+        if(p.vazia()){
+            s.append("\nEmpilhando...");
+            for (int i = 0; i < array.length; i++) {
+                p.empilhar(array[i]);
+            }
+
+        }
+        s.append("\nDesempilhando...");
+        while(!p.vazia()){
+            System.out.println(p.desempilhar());
+        }
+        return s.toString();
+    }
     
 	public static void main(String[] args) {
 		
@@ -238,10 +256,14 @@ public class App {
                 case 4 -> pedido = iniciarPedido();
                 case 5 -> finalizarPedido(pedido);
                 case 6 -> listarProdutosPedidosRecentes();
+                case 7 -> {
+                    int[] matricula = {987654321};
+                    System.out.println(testeMatricula(matricula));
+                }
             }
             pausa();
         }while(opcao != 0);       
 
         teclado.close();    
-    }
+    } 
 }

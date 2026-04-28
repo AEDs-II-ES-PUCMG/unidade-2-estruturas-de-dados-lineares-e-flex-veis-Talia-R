@@ -40,6 +40,21 @@ public class Pilha<E> {
 
 	}
 
+	void imprimir(){
+		Celula<E> atual = topo;
+		while(atual!=fundo){
+			System.out.println(atual.getItem());
+			atual = atual.getProximo();
+		}
+	}
+
+	void imprimirCerto(Celula<E> atual){
+		if(atual!=fundo){
+			imprimirCerto(atual.getProximo());
+			System.out.println(atual.getItem());
+		}
+	}
+
 	/**
 	 * Cria e devolve uma nova pilha contendo os primeiros numItens elementos
 	 * do topo da pilha atual.
@@ -57,4 +72,5 @@ public class Pilha<E> {
 		// TODO
 		return null;
 	}
+
 }
