@@ -1,0 +1,3 @@
+Prancheta Anil;5.45;0.36;
+Envelope Verde mar;7.26;0.25;
+Furador Azul celeste;6.2;0.36;

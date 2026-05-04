@@ -1,7 +1,9 @@
 import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
@@ -205,13 +207,47 @@ public class App {
         return pedido;
     }
     
+    private static void salvarProdutosArquivo(Pilha<Produto> produto){
+        StringBuilder s = new StringBuilder();
+        Celula<Produto> celulaAtual = produto.getTopo();
+        Produto produtoAtual;
+        
+        while(celulaAtual != produto.getFundo()){
+            produtoAtual = celulaAtual.getItem();
+            s.append(produtoAtual.descricao + ";");
+            s.append(produtoAtual.precoCusto + ";");
+            s.append(produtoAtual.margemLucro + ";");
+            s.append("\n");
+            celulaAtual = celulaAtual.getProximo();
+        }
+
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("produtosRecentes.txt", true))){
+            bw.write(s.toString());
+        } catch(IOException ioe){
+            System.err.println("Falha: " + ioe.getMessage());
+        }
+    }
+
     /**
      * Finaliza um pedido, momento no qual ele deve ser armazenado em uma pilha de pedidos.
      * @param pedido O pedido que deve ser finalizado.
      */
     public static void finalizarPedido(Pedido pedido) {
-    	
+    	// criar pilha
+        Pilha<Produto> produtosRecente = new Pilha<>();
+        ItemDePedido[] recentes = pedido.getItensDoPedido();
+
+        // empilhar produtos do pedido
+        for(int i = 0; i < recentes.length; i++){
+            if (recentes[i] != null && recentes[i].getProduto() != null) {
+                produtosRecente.empilhar(recentes[i].getProduto());
+            }
+        }
+
+        // salvar em arquivo
+        salvarProdutosArquivo(produtosRecente);
     	// TODO
+        System.out.println("\n-- Pedido finalizado!--");
     }
     
     public static void listarProdutosPedidosRecentes() {
@@ -219,7 +255,7 @@ public class App {
     	// TODO
     }
 
-    public static <E> void testeMatricula(){
+    public static void testeMatricula(){
         int[] matricula = {9,8,7,6,5,4,3,2,1};
         Pilha<Integer> pilhaTeste = new Pilha<>();
         Celula<Integer> atual;
@@ -243,6 +279,10 @@ public class App {
         atual = pilhaTeste.getTopo();
         pilhaTeste.imprimirCerto(atual);
         System.out.println("\n");
+
+        pilhaTeste.empilhar(1);
+        atual = pilhaTeste.getTopo();
+        pilhaTeste.imprimirCerto(atual);
 
     }
     

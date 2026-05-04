@@ -63,6 +63,10 @@ public class Pilha<E> {
 		return topo;
 	}
 
+	public Celula<E> getFundo(){
+		return fundo;
+	}
+
 	/**
 	 * Cria e devolve uma nova pilha contendo os primeiros numItens elementos
 	 * do topo da pilha atual.
