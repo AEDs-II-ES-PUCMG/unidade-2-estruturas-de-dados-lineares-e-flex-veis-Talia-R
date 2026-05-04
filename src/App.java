@@ -219,22 +219,31 @@ public class App {
     	// TODO
     }
 
-    public static String testeMatricula(int[] array){
-        StringBuilder s = new StringBuilder();
-        Pilha<Integer> p = new Pilha<>(); 
-        if(p.vazia()){
-            s.append("\nEmpilhando...");
-            for (int i = 0; i < array.length; i++) {
-                p.empilhar(array[i]);
-                s.append("\n" + array[i]);
-            }
+    public static <E> void testeMatricula(){
+        int[] matricula = {9,8,7,6,5,4,3,2,1};
+        Pilha<Integer> pilhaTeste = new Pilha<>();
+        Celula<Integer> atual;
 
+        for (int i = 0; i < matricula.length; i++) {
+            pilhaTeste.empilhar(matricula[i]);
         }
-        s.append("\nDesempilhando...");
-        while(!p.vazia()){
-            System.out.println(p.desempilhar());
-        }
-        return s.toString();
+        
+        System.out.print("\n "+ pilhaTeste.imprimir());
+
+        System.out.print("Método imprimirCerto: ");
+        atual = pilhaTeste.getTopo();
+        pilhaTeste.imprimirCerto(atual);
+        
+        pilhaTeste.desempilhar();
+        pilhaTeste.desempilhar();
+        System.out.println("\n\nDesempilhou 2 itens:");
+
+        System.out.print(pilhaTeste.imprimir());
+        System.out.print("Método imprimirCerto: ");
+        atual = pilhaTeste.getTopo();
+        pilhaTeste.imprimirCerto(atual);
+        System.out.println("\n");
+
     }
     
 	public static void main(String[] args) {
@@ -257,10 +266,7 @@ public class App {
                 case 4 -> pedido = iniciarPedido();
                 case 5 -> finalizarPedido(pedido);
                 case 6 -> listarProdutosPedidosRecentes();
-                case 7 -> {
-                    int[] matricula = {987654321};
-                    System.out.println(testeMatricula(matricula));
-                }
+                case 7 -> testeMatricula();
             }
             pausa();
         }while(opcao != 0);       

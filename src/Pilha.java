@@ -40,19 +40,27 @@ public class Pilha<E> {
 
 	}
 
-	void imprimir(){
+	public String imprimir(){
+		StringBuilder s = new StringBuilder();
+		s.append("-> Método imprimir: ");
 		Celula<E> atual = topo;
 		while(atual!=fundo){
-			System.out.println(atual.getItem());
+			s.append(atual.getItem() + " | ");
 			atual = atual.getProximo();
+		}
+		s.append("\n");
+		return s.toString();
+	}
+
+	public void imprimirCerto(Celula<E> atual){
+		if(atual!=fundo){
+			imprimirCerto(atual.getProximo());
+			System.out.print(atual.getItem() + " | ");
 		}
 	}
 
-	void imprimirCerto(Celula<E> atual){
-		if(atual!=fundo){
-			imprimirCerto(atual.getProximo());
-			System.out.println(atual.getItem());
-		}
+	public Celula<E> getTopo(){
+		return topo;
 	}
 
 	/**
