@@ -4,13 +4,14 @@ public class Pilha<E> {
 
 	private Celula<E> topo;
 	private Celula<E> fundo;
+	private int tamanhoPilha;
 
 	public Pilha() {
 
 		Celula<E> sentinela = new Celula<E>();
 		fundo = sentinela;
 		topo = sentinela;
-
+		tamanhoPilha = 0;
 	}
 
 	public boolean vazia() {
@@ -20,12 +21,15 @@ public class Pilha<E> {
 	public void empilhar(E item) {
 
 		topo = new Celula<E>(item, topo);
+		tamanhoPilha++;
 	}
 
 	public E desempilhar() {
 
 		E desempilhado = consultarTopo();
 		topo = topo.getProximo();
+		tamanhoPilha--;
+
 		return desempilhado;
 
 	}
@@ -67,6 +71,15 @@ public class Pilha<E> {
 		return fundo;
 	}
 
+
+
+	private Pilha<E> empilharCerto(Celula<E> atual, int limite) {
+		if (atual == fundo || limite == 0) return new Pilha<>();
+		Pilha<E> pilha = empilharCerto(atual.getProximo(), limite - 1);
+		pilha.empilhar(atual.getItem());
+		return pilha;
+	}
+
 	/**
 	 * Cria e devolve uma nova pilha contendo os primeiros numItens elementos
 	 * do topo da pilha atual.
@@ -80,9 +93,10 @@ public class Pilha<E> {
 	 * @throws IllegalArgumentException se a pilha não contém numItens elementos.
 	 */
 	public Pilha<E> subPilha(int numItens) {
-		
-		// TODO
-		return null;
+		if(tamanhoPilha < numItens) throw new IllegalArgumentException("Pilha não tem essa quantidade de elementos.");
+
+		Pilha<E> pilhaNova = empilharCerto(topo, numItens);
+		return pilhaNova;
 	}
 
 }

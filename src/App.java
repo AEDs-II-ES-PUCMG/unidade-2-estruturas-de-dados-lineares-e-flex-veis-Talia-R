@@ -211,6 +211,7 @@ public class App {
         StringBuilder s = new StringBuilder();
         Celula<Produto> celulaAtual = produto.getTopo();
         Produto produtoAtual;
+
         
         while(celulaAtual != produto.getFundo()){
             produtoAtual = celulaAtual.getItem();
@@ -243,14 +244,12 @@ public class App {
                 produtosRecente.empilhar(recentes[i].getProduto());
             }
         }
-
-        // salvar em arquivo
         salvarProdutosArquivo(produtosRecente);
-    	// TODO
         System.out.println("\n-- Pedido finalizado!--");
     }
     
     public static void listarProdutosPedidosRecentes() {
+        int qntProdutos;
     	
     	// TODO
     }
@@ -307,6 +306,7 @@ public class App {
                 case 5 -> finalizarPedido(pedido);
                 case 6 -> listarProdutosPedidosRecentes();
                 case 7 -> testeMatricula();
+                case 8 -> lerProdutos("produtosRecentes.txt");
             }
             pausa();
         }while(opcao != 0);       
