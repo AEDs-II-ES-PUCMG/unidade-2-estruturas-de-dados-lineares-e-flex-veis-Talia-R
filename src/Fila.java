@@ -58,12 +58,11 @@ public class Fila<E> {
 		int qnt = 0;
 		Celula<E> elementoAtual = frente.getProximo();
 		if(!vazia()){
-			while(elementoAtual.getProximo() != null){
+			while(elementoAtual != null){
 				if(elemento == elementoAtual.getItem()) qnt++;
 				elementoAtual = elementoAtual.getProximo();
 			}
 		}
-		
 
 		return qnt;
 	}

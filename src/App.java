@@ -290,7 +290,6 @@ public class App {
             fila.enfileirar(nome[i]);
         }
         return fila.imprimirQntChar('a');
-        // enfileira nome
 
     }
     
