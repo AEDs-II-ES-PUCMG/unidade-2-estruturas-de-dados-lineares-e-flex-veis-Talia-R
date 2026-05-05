@@ -244,13 +244,11 @@ public class App {
                 produtosRecente.empilhar(recentes[i].getProduto());
             }
         }
-        salvarProdutosArquivo(produtosRecente);
+        // salvarProdutosArquivo(produtosRecente);
         System.out.println("\n-- Pedido finalizado!--");
     }
     
-    public static void listarProdutosPedidosRecentes() {
-        int qntProdutos;
-    	
+    public static void listarProdutosPedidosRecentes() {    	
     	// TODO
     }
 
@@ -284,6 +282,17 @@ public class App {
         pilhaTeste.imprimirCerto(atual);
 
     }
+
+    public static int testeFilaNome(){
+        Fila<Character> fila = new Fila<>();
+        char[] nome = {'n', 'a', 't', 'a', 'l', 'i','a'};
+        for (int i = 0; i < nome.length; i++) {
+            fila.enfileirar(nome[i]);
+        }
+        return fila.imprimirQntChar('a');
+        // enfileira nome
+
+    }
     
 	public static void main(String[] args) {
 		
@@ -306,7 +315,8 @@ public class App {
                 case 5 -> finalizarPedido(pedido);
                 case 6 -> listarProdutosPedidosRecentes();
                 case 7 -> testeMatricula();
-                case 8 -> lerProdutos("produtosRecentes.txt");
+                //case 8 -> lerProdutos("produtosRecentes.txt");
+                case 9 -> System.out.println(testeFilaNome());
             }
             pausa();
         }while(opcao != 0);       
