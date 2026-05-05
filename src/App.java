@@ -66,7 +66,8 @@ public class App {
         System.out.println("4 - Iniciar novo pedido");
         System.out.println("5 - Fechar pedido");
         System.out.println("6 - Listar produtos dos pedidos mais recentes");
-        System.out.println("7 - Teste Preliminar");
+        System.out.println("7 - Teste Preliminar Pila");
+        System.out.println("8 - Teste Preliminar Fila");
         System.out.println("0 - Sair");
         System.out.print("Digite sua opção: ");
         return Integer.parseInt(teclado.nextLine());
@@ -283,14 +284,22 @@ public class App {
 
     }
 
-    public static int testeFilaNome(){
+    public static int testeFilaNome(char[] array, char c){
         Fila<Character> fila = new Fila<>();
-        char[] nome = {'n', 'a', 't', 'a', 'l', 'i','a'};
-        for (int i = 0; i < nome.length; i++) {
-            fila.enfileirar(nome[i]);
+        for (int i = 0; i < array.length; i++) {
+            fila.enfileirar(array[i]);
         }
-        return fila.imprimirQntChar('a');
+        return fila.imprimirQntChar(c);
 
+    }
+
+    public static void setupTeste(){
+        System.out.print("\nInsira seu nome: ");
+        String nome = teclado.nextLine().toLowerCase().trim().replace(" ", "");
+        char[] array = nome.toCharArray();
+        System.out.print("\nEscolha um carater para saber a quantidade de vezes que aparece em seu nome: ");
+        char c = teclado.nextLine().charAt(0);
+        System.out.print("Aparece: " + testeFilaNome(array, c) + " veze(s).\n");
     }
     
 	public static void main(String[] args) {
@@ -315,7 +324,7 @@ public class App {
                 case 6 -> listarProdutosPedidosRecentes();
                 case 7 -> testeMatricula();
                 //case 8 -> lerProdutos("produtosRecentes.txt");
-                case 9 -> System.out.println(testeFilaNome());
+                case 8 -> setupTeste();
             }
             pausa();
         }while(opcao != 0);       
