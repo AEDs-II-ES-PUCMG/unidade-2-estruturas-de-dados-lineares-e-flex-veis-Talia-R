@@ -23,6 +23,9 @@ public class App {
 
     /** Pilha de pedidos */
     static Pilha<Pedido> pilhaPedidos = new Pilha<>();
+
+    /** Fila de pedidos */
+    static Fila<Pedido> FilaPedidos = new Fila<>();
         
     static void limparTela() {
         System.out.print("\033[H\033[2J");
