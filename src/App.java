@@ -25,7 +25,7 @@ public class App {
     static Pilha<Pedido> pilhaPedidos = new Pilha<>();
 
     /** Fila de pedidos */
-    static Fila<Pedido> FilaPedidos = new Fila<>();
+    static Fila<Pedido> filaPedidos = new Fila<>();
         
     static void limparTela() {
         System.out.print("\033[H\033[2J");
@@ -71,6 +71,7 @@ public class App {
         System.out.println("6 - Listar produtos dos pedidos mais recentes");
         System.out.println("7 - Teste Preliminar Pila");
         System.out.println("8 - Teste Preliminar Fila");
+        System.out.println("9 - Ver Fila");
         System.out.println("0 - Sair");
         System.out.print("Digite sua opção: ");
         return Integer.parseInt(teclado.nextLine());
@@ -248,6 +249,7 @@ public class App {
                 produtosRecente.empilhar(recentes[i].getProduto());
             }
         }
+        filaPedidos.enfileirar(pedido);
         // salvarProdutosArquivo(produtosRecente);
         System.out.println("\n-- Pedido finalizado!--");
     }
@@ -328,6 +330,7 @@ public class App {
                 case 7 -> testeMatricula();
                 //case 8 -> lerProdutos("produtosRecentes.txt");
                 case 8 -> setupTeste();
+                case 9 -> filaPedidos.imprimir();
             }
             pausa();
         }while(opcao != 0);       
