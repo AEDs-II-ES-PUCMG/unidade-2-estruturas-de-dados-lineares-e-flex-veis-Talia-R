@@ -23,6 +23,8 @@ public class App {
 
     /** Pilha de pedidos */
     static Pilha<Pedido> pilhaPedidos = new Pilha<>();
+    static Pilha<Produto> produtosRecente = new Pilha<>();
+
 
     /** Fila de pedidos */
     static Fila<Pedido> filaPedidos = new Fila<>();
@@ -239,11 +241,8 @@ public class App {
      * @param pedido O pedido que deve ser finalizado.
      */
     public static void finalizarPedido(Pedido pedido) {
-    	// criar pilha
-        Pilha<Produto> produtosRecente = new Pilha<>();
         ItemDePedido[] recentes = pedido.getItensDoPedido();
 
-        // empilhar produtos do pedido
         for(int i = 0; i < recentes.length; i++){
             if (recentes[i] != null && recentes[i].getProduto() != null) {
                 produtosRecente.empilhar(recentes[i].getProduto());
@@ -254,8 +253,10 @@ public class App {
         System.out.println("\n-- Pedido finalizado!--");
     }
     
-    public static void listarProdutosPedidosRecentes() {    	
-    	// TODO
+    public static void listarProdutosPedidosRecentes() {    
+        if(!produtosRecente.vazia()) {
+            System.out.println(produtosRecente.imprimir());
+        }
     }
 
     public static void testeMatricula(){

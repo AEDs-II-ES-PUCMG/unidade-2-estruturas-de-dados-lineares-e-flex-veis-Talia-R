@@ -45,11 +45,11 @@ public class Pilha<E> {
 	}
 
 	public String imprimir(){
+		if(vazia()) throw new NullPointerException("Lista vazia");
 		StringBuilder s = new StringBuilder();
-		s.append("-> Método imprimir: ");
 		Celula<E> atual = topo;
 		while(atual!=fundo){
-			s.append(atual.getItem() + " | ");
+			s.append(atual.getItem() + "\n");
 			atual = atual.getProximo();
 		}
 		s.append("\n");
