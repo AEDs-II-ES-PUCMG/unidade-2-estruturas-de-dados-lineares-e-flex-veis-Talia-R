@@ -4,6 +4,7 @@ public class Fila<E> {
 
 	private Celula<E> frente;
 	private Celula<E> tras;
+	private int qntItens;
 	
 	Fila() {
 		
@@ -22,6 +23,7 @@ public class Fila<E> {
 		
 		tras.setProximo(novaCelula);
 		tras = tras.getProximo();
+		qntItens++;
 	}
 	
 	public E desenfileirar() {
@@ -37,9 +39,10 @@ public class Fila<E> {
 		primeiro.setProximo(null);
 			
 		// Caso o item desenfileirado seja também o último da fila.
-		if (primeiro == tras)
+		if (primeiro == tras){
 			tras = frente;
-		
+		}
+		qntItens--;
 		return item;
 	}
 	
@@ -81,5 +84,21 @@ public class Fila<E> {
 				aux = aux.getProximo();
 			}
 		} 	
+	}
+
+	public Fila<E> extrairLote(int numItens){
+		if(vazia()) throw new NullPointerException("Fila vazia");
+
+		Fila<E> novaFila = new Fila<>();
+
+		if(qntItens < numItens){
+			numItens = qntItens;
+		}
+
+		for(int i = 0; i < numItens; i++){
+			novaFila.enfileirar(this.desenfileirar());
+		}
+
+		return novaFila;
 	}
 }
