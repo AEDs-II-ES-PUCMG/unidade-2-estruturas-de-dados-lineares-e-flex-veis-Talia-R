@@ -48,10 +48,6 @@ public class ProdutoPerecivel extends Produto{
 		dataDeValidade = validade;
 	}
 
-	public boolean temValidade(){
-		return dataDeValidade != null; 
-	}
-
 	/**
      * Retorna o valor de venda do produto, considerando seu preço de custo, margem de lucro e
      * dias de validade. Se o prazo de validade estiver a menos de 7 dias, será concedido desconto de 25%.

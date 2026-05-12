@@ -1,104 +1,81 @@
 import java.util.NoSuchElementException;
 
 public class Fila<E> {
+    private Celula<E> frente;
+    private Celula<E> tras;
 
-	private Celula<E> frente;
-	private Celula<E> tras;
-	private int qntItens;
-	
-	Fila() {
-		
-		Celula<E> sentinela = new Celula<E>();
-		frente = tras = sentinela;
-	}
-	
-	public boolean vazia() {
-		
-		return (frente == tras);
-	}
-	
-	public void enfileirar(E item) {
-		
-		Celula<E> novaCelula = new Celula<E>(item);
-		
-		tras.setProximo(novaCelula);
-		tras = tras.getProximo();
-		qntItens++;
-	}
-	
-	public E desenfileirar() {
-		
-		E item = null;
-		Celula<E> primeiro;
-		
-		item = consultarPrimeiro();
-		
-		primeiro = frente.getProximo();
-		frente.setProximo(primeiro.getProximo());
-		
-		primeiro.setProximo(null);
-			
-		// Caso o item desenfileirado seja também o último da fila.
-		if (primeiro == tras){
-			tras = frente;
-		}
-		qntItens--;
-		return item;
-	}
-	
-	public E consultarPrimeiro() {
+    Fila() {
 
-		if (vazia()) {
-			throw new NoSuchElementException("Nao há nenhum item na fila!");
-		}
+        Celula<E> sentinela = new Celula<E>();
+        frente = tras = sentinela;
+    }
 
-		return frente.getProximo().getItem();
+    public boolean vazia() {
 
-	}
+        return (frente == tras);
+    }
 
+    public void enfileirar(E item) {
 
-	public int imprimirQntChar(E elemento){
-		int qnt = 0;
-		Celula<E> elementoAtual = frente.getProximo();
-		if(!vazia()){
-			while(elementoAtual != null){
-				if(elemento == elementoAtual.getItem()) qnt++;
-				elementoAtual = elementoAtual.getProximo();
-			}
-		}
+        Celula<E> novaCelula = new Celula<E>(item);
 
-		return qnt;
-	}
+        tras.setProximo(novaCelula);
+        tras = tras.getProximo();
+    }
 
-	
-	public void imprimir() {
-		
-		Celula<E> aux;
-		
-		if (vazia())
-			System.out.println("A fila está vazia!");
-		else {
-			aux = this.frente.getProximo();
-			while (aux != null) {
-				System.out.println(aux.getItem());
-				aux = aux.getProximo();
-			}
-		} 	
-	}
+    public E desenfileirar() {
 
-	public Fila<E> extrairLote(int numItens){
-		if(vazia()) throw new NullPointerException("Fila vazia");
+        E item = null;
+        Celula<E> primeiro;
 
-		Fila<E> novaFila = new Fila<>();
+        item = consultarPrimeiro();
 
-		if(qntItens < numItens){
-			numItens = qntItens;
-		}
+        primeiro = frente.getProximo();
+        frente.setProximo(primeiro.getProximo());
 
-		for(int i = 0; i < numItens; i++){
-			novaFila.enfileirar(this.desenfileirar());
-		}
+        primeiro.setProximo(null);
 
-		return novaFila;
-	}
+        // Caso o item desenfileirado seja também o último da fila.
+        if (primeiro == tras)
+            tras = frente;
+
+        return item;
+    }
+
+    public E consultarPrimeiro() {
+
+        if (vazia()) {
+            throw new NoSuchElementException("Nao há nenhum item na fila!");
+        }
+
+        return frente.getProximo().getItem();
+
+    }
+
+    public int cont_ocorrencias(E item){
+        Celula<E> atual = frente.getProximo();
+        int cont = 0;
+        while(atual!=null){
+            if(atual.getItem() == item){
+                cont++;
+            }
+            atual = atual.getProximo();
+        }
+        return cont;
+    }
+
+    public void imprimir() {
+
+        Celula<E> aux;
+
+        if (vazia())
+            System.out.println("A fila está vazia!");
+        else {
+            aux = this.frente.getProximo();
+            while (aux != null) {
+                System.out.println(aux.getItem());
+                aux = aux.getProximo();
+            }
+        }
+    }
 }

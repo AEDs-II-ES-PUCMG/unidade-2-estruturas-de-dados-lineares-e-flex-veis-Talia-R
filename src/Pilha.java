@@ -4,14 +4,13 @@ public class Pilha<E> {
 
 	private Celula<E> topo;
 	private Celula<E> fundo;
-	private int tamanhoPilha;
 
 	public Pilha() {
 
 		Celula<E> sentinela = new Celula<E>();
 		fundo = sentinela;
 		topo = sentinela;
-		tamanhoPilha = 0;
+
 	}
 
 	public boolean vazia() {
@@ -21,15 +20,12 @@ public class Pilha<E> {
 	public void empilhar(E item) {
 
 		topo = new Celula<E>(item, topo);
-		tamanhoPilha++;
 	}
 
 	public E desempilhar() {
 
 		E desempilhado = consultarTopo();
 		topo = topo.getProximo();
-		tamanhoPilha--;
-
 		return desempilhado;
 
 	}
@@ -42,42 +38,6 @@ public class Pilha<E> {
 
 		return topo.getItem();
 
-	}
-
-	public String imprimir(){
-		if(vazia()) throw new NullPointerException("Lista vazia");
-		StringBuilder s = new StringBuilder();
-		Celula<E> atual = topo;
-		while(atual!=fundo){
-			s.append(atual.getItem() + "\n");
-			atual = atual.getProximo();
-		}
-		s.append("\n");
-		return s.toString();
-	}
-
-	public void imprimirCerto(Celula<E> atual){
-		if(atual!=fundo){
-			imprimirCerto(atual.getProximo());
-			System.out.print(atual.getItem() + " | ");
-		}
-	}
-
-	public Celula<E> getTopo(){
-		return topo;
-	}
-
-	public Celula<E> getFundo(){
-		return fundo;
-	}
-
-
-
-	private Pilha<E> empilharCerto(Celula<E> atual, int limite) {
-		if (atual == fundo || limite == 0) return new Pilha<>();
-		Pilha<E> pilha = empilharCerto(atual.getProximo(), limite - 1);
-		pilha.empilhar(atual.getItem());
-		return pilha;
 	}
 
 	/**
@@ -93,10 +53,30 @@ public class Pilha<E> {
 	 * @throws IllegalArgumentException se a pilha não contém numItens elementos.
 	 */
 	public Pilha<E> subPilha(int numItens) {
-		if(tamanhoPilha < numItens) throw new IllegalArgumentException("Pilha não tem essa quantidade de elementos.");
-
-		Pilha<E> pilhaNova = empilharCerto(topo, numItens);
-		return pilhaNova;
+		
+		// TODO
+		return null;
 	}
 
+	void imprimir() {
+		if(vazia()){
+			throw new NoSuchElementException("A pilha está vazia!");
+		}
+		Celula<E> aux = topo;
+		while(aux!=fundo){
+			System.out.println(aux.getItem());
+			aux = aux.getProximo();
+		}
+
+	}
+	void imprime_certo(){
+		Celula<E> atual = topo;
+		certo(atual);
+	}
+	void certo(Celula<E> atual){
+		if(atual!=fundo){
+			certo(atual.getProximo());
+			System.out.println(atual.getItem());
+		}
+	}
 }
